@@ -21,5 +21,4 @@ public class GuessedListGTC extends VBox{
         this.getChildren().add(hbox);
     }
     
-    
 }
