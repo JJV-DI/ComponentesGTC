@@ -1,29 +1,36 @@
 plugins {
-    id 'application'
+  id 'application'
+  id 'org.openjfx.javafxplugin' version '0.1.0' //Plugin que ayuda a construir proyectos JAVAFX
 }
 
 repositories {
-    mavenCentral()
+	jcenter()
+	google()
+	mavenCentral()
+}
+
+javafx {
+    version = "23"
+    modules = [ 'javafx.base', 'javafx.swing', 'javafx.graphics', 'javafx.controls', 'javafx.fxml' ]
 }
 
 dependencies {
-    testImplementation libs.junit.jupiter
-
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
-    implementation libs.guava
+    //No es necesario incluir las dependencias porque ya lo hace el plugin por nosotros
+    //classpath "gradle.plugin.com.github.johnrengelman:shadow:7.1.2"
 }
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+jar {
+    archiveBaseName.set('ComponentesGTC')
+}
+
+mainClassName = 'ComponentesGTC.Main'
+
+sourceSets {
+  main {
+    resources {
+        srcDirs = ["src/main/java","src/main/resources"]
+        includes = ["**/*.fxml"]  //Importante para poder abrir cualquier extensión en assets
     }
+  }
 }
 
-application {
-    mainClass = 'ComponentesGTC.App'
-}
-
-tasks.named('test') {
-    useJUnitPlatform()
-}
